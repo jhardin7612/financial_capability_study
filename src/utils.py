@@ -2,15 +2,6 @@ import pandas as pd
 import geopandas as gpd
 ##FUNCTIONS
 
-def csv_to_df(file_path:str):
-    """
-    Loads CSV file into a dataframe
-
-    Args:
-        file_path (str) : file path to csv file
-    Returns: pandas dataframe
-    """
-    return pd.read_csv(file_path)
 
 def change_cat_vals(df, c_name, vals, labels):
     '''
@@ -52,7 +43,7 @@ def gen_big_3_df(df):
     feature_df = feature_df.dropna()
     return feature_df
 
-def gen_geo_df(mini_df):
+def gen_geo_df(df):
     """
     Creates the necessary df to make hexbins
     """
@@ -66,16 +57,16 @@ def gen_geo_df(mini_df):
     fin_conf_avg = fin_conf_avg.sort_values(by='state')
     # Load file
     url = "https://raw.githubusercontent.com/holtzy/The-Python-Graph-Gallery/master/static/data/us_states_hexgrid.geojson.json"
-    geoData = gpd.read_file(url)
+    gpd_df = gpd.read_file(url)
     # Add a new column to the geo dataframe that will be used for joining:
-    geoData['state'] = geoData['google_name'].str.replace('(United States)','')
+    gpd_df['state'] = gpd_df['google_name'].str.replace('(United States)','')
     # Sort by column: 'state' (ascending)
-    geoData = geoData.sort_values(['state']).reset_index()
+    gpd_df = gpd_df.sort_values(['state']).reset_index()
     # Drop column: 'bees'
-    geoData = geoData.drop(columns=['bees', 'index'])
+    gpd_df = gpd_df.drop(columns=['bees', 'index'])
     #Create Columns from subsets
-    geoData['fin_sat_avg'] = state_sat_avg['fin_sat_lvl']
-    geoData['math_conf_avg'] = state_math_avg['math_conf_lvl']
-    geoData['fin_conf_avg'] = fin_conf_avg['fin_conf_lvl']
+    gpd_df['fin_sat_avg'] = state_sat_avg['fin_sat_lvl']
+    gpd_df['math_conf_avg'] = state_math_avg['math_conf_lvl']
+    gpd_df['fin_conf_avg'] = fin_conf_avg['fin_conf_lvl']
 
-    return geoData
+    return gpd_df

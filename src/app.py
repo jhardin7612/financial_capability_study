@@ -18,7 +18,7 @@ st.caption("Sample From The Altered Dataset Transposed")
 
 df = pd.read_csv("./data/2021-SxS-Data-and-Data-Info/partial_cleaned_2021.csv")
 df = df.drop(columns='Unnamed: 0')
-st.dataframe(df.T.sample(25))
+###st.dataframe(df.T.sample(25))
 
 #Hexbin Maps
 st.divider()
@@ -26,4 +26,5 @@ st.divider()
 hb_option = st.selectbox("Select a different Feature to change the map",
             options= ['Finacial Satisfaction', 'Financial Confidence', 'Math Confidence'])
 
-hb_map = gen_hexbin_map(df)
+hb_map = gen_hexbin_map(df, hb_option)
+st.pyplot(hb_map)
