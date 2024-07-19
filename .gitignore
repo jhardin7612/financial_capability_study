@@ -8,10 +8,9 @@ desktop.ini
 ._*
 #VSCode
 /.vscode
-#Data
-/data
+
 # Byte-compiled / optimized / DLL files
-/data
+
 /vscode
 __pycache__/
 *.py[cod]
