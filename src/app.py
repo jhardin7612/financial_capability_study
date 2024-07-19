@@ -3,7 +3,8 @@ Generate Hexbin map of United states tht show various features related to financ
 """
 import streamlit as st
 import pandas as pd
-
+import sys
+sys.path.insert(0,'.')
 from hexbin import gen_hexbin_map
 
 # Header 
