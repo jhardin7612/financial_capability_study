@@ -18,7 +18,8 @@ st.caption("Sample From The Altered Dataset Transposed")
 
 df = pd.read_csv("./data/2021-SxS-Data-and-Data-Info/partial_cleaned_2021.csv")
 df = df.drop(columns='Unnamed: 0')
-###st.dataframe(df.T.sample(25))
+sample_df = df.sample(25)
+st.dataframe(sample_df.T)
 
 #Hexbin Maps
 st.divider()
