@@ -3,7 +3,7 @@ Generate Hexbin map of United states tht show various features related to financ
 """
 import streamlit as st
 import pandas as pd
-from utils import csv_to_df
+
 from hexbin import gen_hexbin_map
 
 # Header 
@@ -16,9 +16,9 @@ st.markdown("The National Financial Capability Study (NFCS)is a triannual survey
 #Sample From Original Data Frame Transposed, Scrollable?
 st.caption("Sample From The Altered Dataset Transposed")
 
-df = csv_to_df("./data/2021-SxS-Data-and-Data-Info/partial_cleaned_2021.csv")
-#df = df.drop(columns='Unnamed: 0')
-#st.dataframe(df.T.sample(25))
+df = pd.read_csv("./data/2021-SxS-Data-and-Data-Info/partial_cleaned_2021.csv")
+df = df.drop(columns='Unnamed: 0')
+st.dataframe(df.T.sample(25))
 
 #Hexbin Maps
 st.divider()
